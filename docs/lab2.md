@@ -65,3 +65,4 @@ Das separat erstellte ER-Diagramm der Bewertungsapp zeigt die Entitäten `Team`,
 ## Ergebnis
 
 Für `Autor` und `Buch` liegen jeweils ein Model und eine Migration vor. Die Datenbanktabellen werden durch `npx sequelize-cli db:migrate` erstellt beziehungsweise aktualisiert. Die Verbindung der Models im JavaScript-Code folgt in der nächsten Einheit.
+![Datenbank](screenshots/DB.png)
