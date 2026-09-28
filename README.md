@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Bewertungsapp
 
 Repository für die Bewertungsapp und die Datenbankübungen im Unterricht an der **LBS Eibiswald**.
@@ -39,3 +40,31 @@ docs/
 ```
 
 Die Bibliothekstabellen sind eine Übung für Sequelize in Lab 2. Das ER-Diagramm beschreibt das Datenmodell der Bewertungsapp.
+=======
+# Bewertungsapp
+
+Repository für die Bewertungsapp im Unterricht an der **LBS Eibiswald**.
+
+## Labs
+
+- [Lab 1 – Installation und allgemeine Fragen](docs/lab1.md)
+
+## Aufgabenübersicht
+
+### Lab 1
+
+- Node.js, npm und Ionic CLI installieren
+- Datenbank erstellen
+- Screenshots der Versionen und der leeren Datenbank erstellen
+- Fragen zu Capacitor, Cordova, Sequelize, npm, npx und REST beantworten
+- GitHub-Repository erstellen und mit dem Tag `lab1` abgeben
+
+## Projektstruktur
+
+```text
+docs/
+├── lab1.md
+└── screenshots/
+    ├── Versions.png
+    └── dbEmpty.png
+>>>>>>> 4b31bd38cdfefdd850fa0eced48f8ce268534cc6
