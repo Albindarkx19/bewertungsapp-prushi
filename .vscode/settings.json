@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^node -e \"const db = require\\('\\./models'\\); console\\.log\\(Object\\.keys\\(db\\)\\.filter\\(name => name !== 'sequelize' && name !== 'Sequelize'\\)\\.sort\\(\\)\\.join\\(', '\\)\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
