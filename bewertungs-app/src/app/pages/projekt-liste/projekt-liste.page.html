@@ -1,0 +1,50 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="brand" slot="start"><ion-icon name="layers-outline" aria-hidden="true"></ion-icon><span>Projektjury</span></div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main class="page-shell">
+    <div class="page-heading">
+      <div><p class="eyebrow">Bewertungsapp</p><h1>Projekte</h1></div>
+      @if (!loading() && !error()) {
+        <span class="count-label">{{ projects().length }} gesamt</span>
+      }
+    </div>
+
+    @if (loading()) {
+      <section class="state" aria-live="polite" aria-label="Projekte werden geladen">
+        <ion-spinner name="crescent"></ion-spinner><p>Projekte werden geladen...</p>
+      </section>
+    } @else if (error()) {
+      <section class="state" role="alert">
+        <ion-icon name="cloud-offline-outline" aria-hidden="true"></ion-icon>
+        <h2>Keine Verbindung</h2><p>{{ error() }}</p>
+        <ion-button (click)="loadProjects()"><ion-icon slot="start" name="refresh-outline"></ion-icon>Erneut versuchen</ion-button>
+      </section>
+    } @else {
+      <div class="list-heading"><span>Projekt / Team</span><span>Präsentation</span></div>
+      @if (projects().length) {
+        <ion-list class="project-list" lines="full">
+          @for (project of projects(); track project.id) {
+            <ion-item [routerLink]="['/projects', project.id]" [detail]="true" class="project-row">
+              <div class="project-symbol" slot="start"><ion-icon name="code-slash-outline" aria-hidden="true"></ion-icon></div>
+              <ion-label class="ion-text-wrap">
+                <h2>{{ project.titel }}</h2>
+                <p>{{ project.Team?.name || 'Ohne Team' }}@if (project.Team?.klasse; as klasse) {<span> · {{ klasse }}</span>}</p>
+              </ion-label>
+              <span class="project-date" slot="end">{{ project.praesentiertAm ? (project.praesentiertAm | date:'dd.MM.yyyy') : 'Noch kein Termin' }}</span>
+            </ion-item>
+          }
+        </ion-list>
+      } @else {
+        <section class="state">
+          <ion-icon name="folder-open-outline" aria-hidden="true"></ion-icon>
+          <h2>Noch keine Projekte</h2>
+          <p>Es sind noch keine Projekte hinterlegt.</p>
+        </section>
+      }
+    }
+  </main>
+</ion-content>

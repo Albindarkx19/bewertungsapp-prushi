@@ -8,6 +8,7 @@ Repository für die Bewertungsapp und die Datenbankübungen im Unterricht an der
 - [Lab 2 – Datenbank-Grundlagen und Sequelize-CLI](docs/lab2.md)
 - [Lab 3 – Sequelize-Beziehungen, Bewertungsmodelle und Testdaten](docs/lab3.md)
 - [Lab 4 – Express-Routen und Sequelize-Abfragen](docs/lab4.md)
+- [Lab 6 – Ionic-Frontend für die Bewertungsapp](docs/lab6.md)
 
 ## Aufgabenübersicht
 
@@ -44,6 +45,25 @@ Repository für die Bewertungsapp und die Datenbankübungen im Unterricht an der
 - Ausleihen anlegen, zurückgeben und nach Leser abfragen
 - Durchschnittliches Erscheinungsjahr mit Sequelize berechnen
 
+### Lab 6
+
+- Eigenes Ionic-Angular-Projekt im Ordner `bewertungs-app` anlegen
+- Typisierten API-Service für Projektliste und Projektdetails implementieren
+- Projekte inklusive Team auflisten
+- Detailansicht mit Kriterien, Jury, Punkten und Kommentaren anzeigen
+- Express-Endpunkte `/projects` und `/projects/:id` inklusive CORS ergänzen
+
+## Frontend starten
+
+Backend und MySQL müssen laufen. Die App liegt in [bewertungs-app](bewertungs-app/package.json). Wegen der aktuellen Angular-Version wird eine kompatible Node-Version benötigt, zum Beispiel Node 24 ab 24.15.0. Mit der derzeit installierten älteren Node-Version funktioniert dieser Startbefehl:
+
+```bash
+cd bewertungs-app
+npx --yes --package=node@24 --package=@ionic/cli -c "ionic serve --no-open --host=localhost --port=8100"
+```
+
+Die App ist unter `http://localhost:8100` erreichbar. Einrichtung, optionale Demodaten und Prüfungen sind in [Lab 6](docs/lab6.md) dokumentiert.
+
 ## API starten
 
 Die MySQL-Datenbank aus `config/config.json` muss erreichbar sein. Zuerst bei Bedarf die Migrationen ausführen, anschließend den Server starten:
@@ -65,16 +85,22 @@ docs/
 ├── lab2.md
 ├── lab3.md
 ├── lab4.md
+├── lab6.md
 ├── Bewertungsapp_ER_Diagramm.html
 └── screenshots/
     ├── Versions.png
     ├── dbEmpty.png
     └── ERDIAGRAMM.png
 models/
+bewertungs-app/
+└── src/app/
+    ├── services/
+    └── pages/
 routes/
 ├── buecher.js
 ├── autoren.js
-└── ausleihen.js
+├── ausleihen.js
+└── projects.js
 migrations/
 seeders/
 ```

@@ -1,0 +1,4 @@
+node_modules/
+bewertungs-app/www/
+bewertungs-app/.angular/
+*.log

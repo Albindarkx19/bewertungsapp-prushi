@@ -1,0 +1,44 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/projects" text="Projekte"></ion-back-button></ion-buttons>
+    <ion-title>Projektdetails</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main class="page-shell">
+    @if (loading()) {
+      <section class="state" aria-live="polite"><ion-spinner name="crescent"></ion-spinner><p>Projekt wird geladen...</p></section>
+    } @else if (error()) {
+      <section class="state" role="alert">
+        <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon><h1>Projekt nicht verfügbar</h1><p>{{ error() }}</p>
+        <ion-button (click)="loadProject()"><ion-icon slot="start" name="refresh-outline"></ion-icon>Erneut versuchen</ion-button>
+        <ion-button fill="clear" routerLink="/projects">Zur Projektliste</ion-button>
+      </section>
+    } @else if (project(); as detail) {
+        <div class="page-heading"><div><p class="eyebrow">Projekt #{{ detail.id }}</p><h1>{{ detail.titel }}</h1></div></div>
+        <dl class="project-facts">
+          <div><dt>Team</dt><dd><ion-icon name="people-outline" aria-hidden="true"></ion-icon>{{ detail.Team?.name || 'Ohne Team' }}</dd></div>
+          <div><dt>Klasse</dt><dd>{{ detail.Team?.klasse || 'Nicht angegeben' }}</dd></div>
+          <div><dt>Präsentation</dt><dd>{{ detail.praesentiertAm ? (detail.praesentiertAm | date:'dd.MM.yyyy') : 'Noch kein Termin' }}</dd></div>
+          <div><dt>Bewertungen</dt><dd>{{ detail.Evaluations.length }}</dd></div>
+        </dl>
+        <section class="description-section"><h2>Über das Projekt</h2><p class="description">{{ detail.beschreibung || 'Noch keine Beschreibung hinterlegt.' }}</p></section>
+        <section class="evaluations-section">
+          <div class="section-heading"><h2>Bewertungen</h2><span class="count-label">{{ detail.Evaluations.length }} Einträge</span></div>
+          @for (evaluation of detail.Evaluations; track evaluation.id) {
+            <article class="evaluation-row">
+              <div class="evaluation-main">
+                <h3>{{ evaluation.Criterion?.name || 'Kriterium nicht verfügbar' }}</h3>
+                <p class="juror"><ion-icon name="person-circle-outline" aria-hidden="true"></ion-icon>{{ evaluation.Juror?.name || 'Jury nicht angegeben' }}</p>
+                @if (evaluation.comment) {<p class="comment">{{ evaluation.comment }}</p>}
+              </div>
+              <div class="evaluation-score"><p><strong>{{ evaluation.score }}</strong><span> / {{ evaluation.Criterion?.maxScore ?? '–' }} Punkte</span></p></div>
+            </article>
+          } @empty {
+            <div class="state compact-state"><ion-icon name="clipboard-outline" aria-hidden="true"></ion-icon><h3>Noch keine Bewertungen</h3><p>Für dieses Projekt wurden noch keine Punkte vergeben.</p></div>
+          }
+        </section>
+    }
+  </main>
+</ion-content>
